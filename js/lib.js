@@ -19,7 +19,7 @@ module.exports={
         var start_index=str.indexOf(start,search_from)
         var end_index=str.indexOf(end,start_index)
 
-        lg(""+start_index+" <--> "+end_index)
+        //lg(""+start_index+" <--> "+end_index)
 
         var sub=str.slice(start_index,end_index).replace(start,"")
         if(start_index==-1)

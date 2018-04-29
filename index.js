@@ -44,6 +44,7 @@ var start=function(url,ondone)
         var search_from=0;
         //lg(lasi)
         var ress=""
+        var links=[]
 
         while(end<lasi){
         
@@ -57,11 +58,14 @@ var start=function(url,ondone)
             search_from=end;
             ress=ress+r.sub;
             
+            var link=lib.substr(r.sub,0,'<a href="/','" class="js-showcard-li').sub
+            
+            links.push(link)
             
             
         }
-        
-        ondone(ress)
+         ondone(links)
+         //lg('start.getHtml.onDone '+JSON.stringify(links))
 
 
     }) 
@@ -84,21 +88,27 @@ app.get('/all',function(req,res){
 app.get('/',function(req,res){
      var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page="
 
-    var i=0;
+    var i=1;
     var tosend=""
-    var callback=function(data){
-        tosend=tosend+data
+    var linksToSend=[]
+    var ondone=function(links){
+        
+        for (var ij = 0; ij < links.length; ij++) {
+            linksToSend.push(links[ij])
+        }
+
+
         if(i<12){
             i=i+1
             var url2=url+i
-            start(url2,callback)  
+            start(url2,ondone)  
         }
         else
-            res.send(tosend)
+            res.send(JSON.stringify(linksToSend))
     };
 
 
-    start(url+i,callback)   
+    start(url+i,ondone)   
       
     
 
