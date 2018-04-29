@@ -1,5 +1,5 @@
 {
-  "name": "web_scraper",
+  "name": "web_starter",
   "version": "1.0.0",
   "description": "Web scraper",
   "main": "index.js",
