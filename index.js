@@ -1,3 +1,4 @@
+ 
 var express=require('express')
 var app=express()
 var hbs=require('express-handlebars')
@@ -72,6 +73,51 @@ var start=function(url,ondone)
 
 
 }
+
+var getOrgaizer=function(url,onGotOrganizer){
+    
+
+    gethtml(url,function(body){
+
+        var organizer=lib.substr(body,0,'Retreat organizer: <b>','</b>').sub
+        onGotOrganizer(organizer)
+
+
+    })
+      
+}
+
+var next_step=function(links,res){
+
+    var i=0
+    var organizersToSend=[]
+ 
+    var onGotOrganizer=function(organizer){
+
+        organizersToSend.push(organizer)
+        i++
+            if(i<links.length){
+
+                var url2="https://www.bookyogaretreats.com/"+links[i]
+                res.write("<br>Parsing Detail Page : "+i+" or "+links.length+" --- <a href="+url2+">"+url2+"</a>");4
+                getOrgaizer(url2,onGotOrganizer)
+                
+
+            }
+            else{
+                res.write(JSON.stringify(organizersToSend))
+                res.end()
+            }
+
+    }
+    
+    var url2="https://www.bookyogaretreats.com/"+links[i]
+    res.write("<br>Parsing Detail Page : "+i+" or "+links.length+" --- <a href="+url2+">"+url2+"</a>");4
+
+    getOrgaizer(url2,onGotOrganizer)
+
+}
+
 app.get('/all',function(req,res){
     var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page=1";
      
@@ -85,26 +131,51 @@ app.get('/all',function(req,res){
 
 
 
+
 app.get('/',function(req,res){
+
+    var npages=2;
+    if(req.query.pages)
+    {
+        npages=req.query.pages;
+    }
+    res.write('<head>')
+
+    res.write('<title>')
+    res.write('Data Jacking !')
+
+    res.write('</title>')   
+     res.write('</head>')
+
+     res.write('<h1>')
+     res.write('Lets Jack Some Data out of '+npages+' pages from em muthafukas <br>')
+ 
+     res.write('</h1>')   
+
+
+
      var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page="
 
     var i=1;
     var tosend=""
     var linksToSend=[]
     var ondone=function(links){
-        
         for (var ij = 0; ij < links.length; ij++) {
             linksToSend.push(links[ij])
         }
 
 
-        if(i<12){
-            i=i+1
-            var url2=url+i
+        var url2=url+i
+        if(i<npages){
+            res.write("<br>Parsing Page : "+i+" --- <a href="+url2+">"+url2+"</a>");4
             start(url2,ondone)  
+            i=i+1
         }
-        else
-            res.send(JSON.stringify(linksToSend))
+        else{
+
+            next_step(linksToSend,res)
+                        
+        }
     };
 
 
