@@ -1,0 +1,11 @@
+ 
+body {
+    color: white;
+    text-align: center; 
+    background : url(  ../images/bg.png );
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  
+}
+ 
