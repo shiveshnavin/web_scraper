@@ -10,18 +10,27 @@ module.exports={
         res.end()
     },
 
-    substr:function(str,start,end ){
+    substr:function(str,search_from,start,end ){
 
 
         str=""+str
-        lg(str)
+
         
-        var start_index=str.indexOf(start)
+        var start_index=str.indexOf(start,search_from)
         var end_index=str.indexOf(end,start_index)
 
-        lg(""+start_index+" : "+end_index)
-        var sub=str.slice(start_index,(end_index+1)).replace(start,"")
-        return (sub)
+        lg(""+start_index+" <--> "+end_index)
+
+        var sub=str.slice(start_index,end_index).replace(start,"")
+        if(start_index==-1)
+        {
+            return start_index;
+        }
+        return {
+            start:start_index,
+            end:end_index,
+            sub:sub
+        }
 
 
     }
