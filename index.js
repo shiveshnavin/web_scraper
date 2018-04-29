@@ -173,7 +173,7 @@ app.get('/all',function(req,res){
 
 app.get('/',function(req,res){
 
-    var npages=2;
+    var npages=12;
     if(req.query.pages)
     {
         npages=req.query.pages;
