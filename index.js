@@ -177,12 +177,12 @@ app.get('/',function(req,res){
     var topages=12;
     if(req.query.from)
     {
-        frompages=req.query.pages;
+        frompages=req.query.from;
     }
 
     if(req.query.to)
     {
-        topages=req.query.pages;
+        topages=req.query.to;
     }
     res.write('<head>')
 
