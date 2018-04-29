@@ -99,7 +99,8 @@ var next_step=function(links,res){
             if(i<links.length){
 
                 var url2="https://www.bookyogaretreats.com/"+links[i]
-                res.write("<br>Parsing Detail Page : "+i+" or "+links.length+" --- <a href="+url2+">"+url2+"</a>");4
+                res.write('<br>Found : '+i+'/'+links.length+' '+organizer+'')
+                //res.write("<br>Parsing Detail Page : "+i+" or "+links.length+" --- <a href="+url2+">"+url2+"</a>");4
                 getOrgaizer(url2,onGotOrganizer)
                 
 
@@ -112,7 +113,7 @@ var next_step=function(links,res){
     }
     
     var url2="https://www.bookyogaretreats.com/"+links[i]
-    res.write("<br>Parsing Detail Page : "+i+" or "+links.length+" --- <a href="+url2+">"+url2+"</a>");4
+    //res.write("<br>Parsing Detail Page : "+i+" or "+links.length+" --- <a href="+url2+">"+url2+"</a>");4
 
     getOrgaizer(url2,onGotOrganizer)
 
@@ -148,7 +149,7 @@ app.get('/',function(req,res){
      res.write('</head>')
 
      res.write('<h1>')
-     res.write('Lets Jack Some Data out of '+npages+' pages from em muthafukas <br>')
+     res.write('Lets Jack Some Data out of '+npages+' pages  from em muthafukas <br>')
  
      res.write('</h1>')   
 
@@ -166,8 +167,8 @@ app.get('/',function(req,res){
 
 
         var url2=url+i
-        if(i<npages){
-            res.write("<br>Parsing Page : "+i+" --- <a href="+url2+">"+url2+"</a>");4
+        if(i<=npages){
+            res.write("<br>Parsing Page : "+i+" of "+npages+" --- <a href="+url2+">"+url2+"</a>");4
             start(url2,ondone)  
             i=i+1
         }
