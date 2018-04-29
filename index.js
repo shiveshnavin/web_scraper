@@ -6,6 +6,7 @@ var path=require('path')
 var urlparser=require('url')
 var http=require('http')
 var request=require('request')
+var jsonexport=require('jsonexport')
 var fs=require('fs')
 var lib=require('./js/lib.js')
 var lg=lib.lg
@@ -87,6 +88,42 @@ var getOrgaizer=function(url,onGotOrganizer){
       
 }
 
+var download=function(links,res){
+    if(links){
+        var t=new Date().getTime();
+          var fs = require('fs');
+          var name="csv_"+t+".csv"
+          var path='/'+name
+
+         
+            
+            jsonexport(links,function(err, csv){
+              if(err) return console.log(err);
+              console.log(csv);
+
+              fs.writeFile("public"+path, csv, function (err) {
+                if (err) {
+                    return console.log(err);
+                }
+                console.log("The file was saved!");
+               
+                var l='<br><br><a download="'+name+'" href="'+name+'" title="Download CSV">'+
+                '<img alt="ImageName" src="https://cyberspacemarketer.com/wp-content/uploads/2017/12/Download-Button.png">'+
+            '</a>'
+
+
+            res.write(l)
+            res.end()
+
+
+            });  
+
+
+            });
+    }
+   
+}
+
 var next_step=function(links,res){
 
     var i=0
@@ -106,8 +143,9 @@ var next_step=function(links,res){
 
             }
             else{
-                res.write(JSON.stringify(organizersToSend))
-                res.end()
+                download(organizersToSend,res)
+               // res.write(JSON.stringify(organizersToSend))
+                //res.end()
             }
 
     }
