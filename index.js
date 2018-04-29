@@ -187,7 +187,7 @@ app.get('/',function(req,res){
      res.write('</head>')
 
      res.write('<h1>')
-     res.write('Lets Jack Some Data out of '+npages+' pages  from em muthafukas <br>')
+     res.write('Lets Scrape Some Data out of '+npages+' pages ! <br>')
  
      res.write('</h1>')   
 
