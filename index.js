@@ -5,6 +5,7 @@ var path=require('path')
 var urlparser=require('url')
 var http=require('http')
 var request=require('request')
+var fs=require('fs')
 var lib=require('./js/lib.js')
 var lg=lib.lg
 
@@ -32,12 +33,24 @@ var gethtml=function(url,callback){
 
 app.get('/',function(req,res){
     var url=req.query.url;
+    /*
+        gethtml(url,function(body){
 
-    gethtml(url,function(body){
+            res.send(body)
 
-        res.send(body)
+        }) 
+    */
 
-    }) 
+    var data = fs.readFileSync('test.txt');
+
+    lg(data)
+    
+    res.send(lib.substr(data,'<div class=sf_filter_group>','<div id=sf_price class=sf_item'));
+ 
+
+    
+
+    
 
 })
 

@@ -1,7 +1,8 @@
+var lg=function(str){
+    console.log(str);
+}
 module.exports={
-    lg:function(str){
-        console.log(str);
-    },
+    lg:lg,
     sendjson:function(res,json){
 
         res.set('Content-type','application/json')
@@ -9,10 +10,18 @@ module.exports={
         res.end()
     },
 
-    getsubstr:function(start,end,callback){
+    substr:function(str,start,end ){
 
 
+        str=""+str
+        lg(str)
         
+        var start_index=str.indexOf(start)
+        var end_index=str.indexOf(end,start_index)
+
+        lg(""+start_index+" : "+end_index)
+        var sub=str.slice(start_index,(end_index+1)).replace(start,"")
+        return (sub)
 
 
     }
