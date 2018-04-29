@@ -2,6 +2,10 @@ var express=require('express')
 var app=express()
 var hbs=require('express-handlebars')
 var path=require('path')
+var urlparser=require('url')
+var http=require('http')
+var lib=require('./js/lib.js')
+var lg=lib.lg
 
 app.engine('hbs',hbs({
     extname:"hbs"
@@ -11,7 +15,24 @@ app.engine('hbs',hbs({
 app.set('view engine','hbs')
 app.use(express.static(path.join(__dirname,'public')))
 
+var gethtml=function(url,callback){
+
+    lg(url)
+    lg(urlparser.parse(url))
+
+}
+
+
+
 app.get('/',function(req,res){
+    var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page=1";
+
+    gethtml(url)
+    lib.sendjson(res,urlparser.parse(url))
+})
+
+
+app.get('/hello',function(req,res){
 
 
     res.render('index',{

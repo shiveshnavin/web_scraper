@@ -1,2 +1,3 @@
-# nodejs_starter
- Empty NodeJS app with Handlerbars and Http
+# Web Scraper
+
+Web scraping with NodeJS
