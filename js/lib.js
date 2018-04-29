@@ -7,5 +7,13 @@ module.exports={
         res.set('Content-type','application/json')
         res.send(json)
         res.end()
+    },
+
+    getsubstr:function(start,end,callback){
+
+
+        
+
+
     }
 }

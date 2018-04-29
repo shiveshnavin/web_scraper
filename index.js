@@ -4,6 +4,7 @@ var hbs=require('express-handlebars')
 var path=require('path')
 var urlparser=require('url')
 var http=require('http')
+var request=require('request')
 var lib=require('./js/lib.js')
 var lg=lib.lg
 
@@ -20,29 +21,11 @@ var gethtml=function(url,callback){
     lg(url)
     lg(urlparser.parse(url))
     var parsed=urlparser.parse(url)
-    http.get({
-        hostname:parsed.hostname,
-        path:parsed.path
-    },
-    function(res){
-        
-        var chunk="";
-        res.on('data',function(data){
+    request(url,function(err,res,body){
 
-            chunk=chunk+data
-
-        }) 
-    
-        res.on('end',function(){
-            lg(chunk)
-            callback(chunk)
-        })
-
-    }
-    ).on('error',function(){
-        callback("No Data Recieved !")
+        callback(body)
     })
-
+    
 }
 
 
