@@ -173,10 +173,16 @@ app.get('/all',function(req,res){
 
 app.get('/',function(req,res){
 
-    var npages=12;
-    if(req.query.pages)
+    var frompages=0;
+    var topages=12;
+    if(req.query.from)
     {
-        npages=req.query.pages;
+        frompages=req.query.pages;
+    }
+
+    if(req.query.to)
+    {
+        topages=req.query.pages;
     }
     res.write('<head>')
 
@@ -187,7 +193,7 @@ app.get('/',function(req,res){
      res.write('</head>')
 
      res.write('<h1>')
-     res.write('Lets Scrape Some Data out of '+npages+' pages ! <br>')
+     res.write('Lets Scrape Some Data out of '+topages+' pages ! <br>')
  
      res.write('</h1>')   
 
@@ -195,7 +201,7 @@ app.get('/',function(req,res){
 
      var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page="
 
-    var i=1;
+    var i=frompages;
     var tosend=""
     var linksToSend=[]
     var ondone=function(links){
@@ -205,8 +211,8 @@ app.get('/',function(req,res){
 
 
         var url2=url+i
-        if(i<=npages){
-            res.write("<br>Parsing Page : "+i+" of "+npages+" --- <a href="+url2+">"+url2+"</a>");4
+        if(i<=topages){
+            res.write("<br>Parsing Page : "+i+" of "+topages+" --- <a href="+url2+">"+url2+"</a>");4
             start(url2,ondone)  
             i=i+1
         }
