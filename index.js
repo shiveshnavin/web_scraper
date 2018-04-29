@@ -20,13 +20,53 @@ app.use(express.static(path.join(__dirname,'public')))
 var gethtml=function(url,callback){
 
     lg(url)
-    lg(urlparser.parse(url))
+    //lg(urlparser.parse(url))
     var parsed=urlparser.parse(url)
     request(url,function(err,res,body){
 
         callback(body)
     })
     
+}
+var start=function(url,ondone)
+{
+    gethtml(url,function(body){
+
+                    
+        var data = body//fs.readFileSync('./public/test.txt');
+
+        //lg(data)
+        
+    
+
+        var  lasi=data.lastIndexOf("<div class=showcard__description>");
+        var end=0;
+        var search_from=0;
+        //lg(lasi)
+        var ress=""
+
+        while(end<lasi){
+        
+            //lg("Searching from : "+search_from +" End was "+end)
+            var r=lib.substr(data,search_from,'<div class=showcard__thumbnail>','<div class=showcard__description>') 
+            if(r==-1)
+            {
+                break;
+            }
+            end=r.end
+            search_from=end;
+            ress=ress+r.sub;
+            
+            
+            
+        }
+        
+        ondone(ress)
+
+
+    }) 
+
+
 }
 app.get('/all',function(req,res){
     var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page=1";
@@ -38,46 +78,28 @@ app.get('/all',function(req,res){
         }) 
      
 })
+
+
+
 app.get('/',function(req,res){
-    /* var url=req.query.url;
-   
-        gethtml(url,function(body){
+     var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page="
 
-            res.send(body)
+    var i=0;
+    var tosend=""
+    var callback=function(data){
+        tosend=tosend+data
+        if(i<12){
+            i=i+1
+            var url2=url+i
+            start(url2,callback)  
+        }
+        else
+            res.send(tosend)
+    };
 
-        }) 
-    */
 
-    var data = fs.readFileSync('./public/test.txt');
-
-    lg(data)
-    
-   
-
-    var  lasi=data.lastIndexOf("<div class=showcard__description>");
-    var end=0;
-    var search_from=0;
-    lg(lasi)
-    var ress=""
-
-    while(end<lasi){
-       
-         lg("Searching from : "+search_from +" End was "+end)
-         var r=lib.substr(data,search_from,'<div class=showcard__thumbnail>','<div class=showcard__description>') 
-         if(r==-1)
-         {
-             break;
-         }
-         end=r.end
-         search_from=end;
-         ress=ress+r.sub;
-         
-        
-        
-    }
-    
-    res.send(ress)
-
+    start(url+i,callback)   
+      
     
 
 })
