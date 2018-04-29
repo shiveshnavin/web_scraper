@@ -19,16 +19,43 @@ var gethtml=function(url,callback){
 
     lg(url)
     lg(urlparser.parse(url))
+    var parsed=urlparser.parse(url)
+    http.get({
+        hostname:parsed.hostname,
+        path:parsed.path
+    },
+    function(res){
+        
+        var chunk="";
+        res.on('data',function(data){
+
+            chunk=chunk+data
+
+        }) 
+    
+        res.on('end',function(){
+            lg(chunk)
+            callback(chunk)
+        })
+
+    }
+    ).on('error',function(){
+        callback("No Data Recieved !")
+    })
 
 }
 
 
 
 app.get('/',function(req,res){
-    var url="https://www.bookyogaretreats.com/all/d/asia-and-oceania/india?page=1";
+    var url=req.query.url;
 
-    gethtml(url)
-    lib.sendjson(res,urlparser.parse(url))
+    gethtml(url,function(body){
+
+        res.send(body)
+
+    }) 
+
 })
 
 
