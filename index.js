@@ -187,13 +187,13 @@ app.get('/',function(req,res){
     res.write('<head>')
 
     res.write('<title>')
-    res.write('Data Jacking !')
+    res.write('Data Scraping !')
 
     res.write('</title>')   
      res.write('</head>')
 
      res.write('<h1>')
-     res.write('Lets Scrape Some Data out of '+topages+' pages ! <br>')
+     res.write('Lets Scrape Some Data till '+topages+' page ! <br>')
  
      res.write('</h1>')   
 
