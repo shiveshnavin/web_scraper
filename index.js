@@ -193,7 +193,7 @@ app.get('/',function(req,res){
      res.write('</head>')
 
      res.write('<h1>')
-     res.write('Lets Scrape Some Data till '+topages+' page ! <br>')
+     res.write('Crawling through 2 Level Paginatied links in pages till page  '+topages+' <br>')
  
      res.write('</h1>')   
 
