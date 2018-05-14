@@ -6,7 +6,7 @@ PARAMS
 @to : Page upto which scraping is done
 @from : Page from which scraping starts
 
-# URL : https://salty-dusk-20890.herokuapp.com/?to=3&from=1
+# URL : https://crawler-yoga.herokuapp.com/?to=3&from=1
 
 
 Parse List of All Yoga Events from 
