@@ -114,15 +114,15 @@ var download=function(links,res){
 
 
 
+            res.write(l)
      res.write('</p>') 
  
 var index_b = fs.readFileSync('./views/index_h.hbs');
-res.write(index_b);
-res.write(' <section class="intro"><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2">');
+ 
 
-            res.write(l)
-res.write('   </div></div></div></section>');
+ 
              
+res.write(index_h);
     
             res.end()
 

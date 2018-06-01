@@ -113,11 +113,17 @@ var download=function(links,res){
             '</a>'
 
 
-            res.write(l)
 
-     res.write('</p>')  
+            res.write(l)
+     res.write('</p>') 
+ 
 var index_b = fs.readFileSync('./views/index_h.hbs');
+ 
+
+ 
+             
 res.write(index_b);
+    
             res.end()
 
 
