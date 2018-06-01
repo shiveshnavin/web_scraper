@@ -116,7 +116,7 @@ var download=function(links,res){
             res.write(l)
 
      res.write('</p>')  
-var index_b = fs.readFileSync('./views/index_h.hbs');
+var index_b = fs.readFileSync('./views/index_b.hbs');
 res.write(index_b);
             res.end()
 
@@ -192,7 +192,7 @@ app.get('/',function(req,res){
 
 
  
-var index_h = fs.readFileSync('./views/index_b.hbs');
+var index_h = fs.readFileSync('./views/index_h.hbs');
 
 
 

@@ -68,7 +68,7 @@ Although you can use them, for a more unique website, replace these images with 
             <div class="header-content-inner">
                 <h1>{{body.head}}</h1>
                 <p>{{body.text}}</p>
-                 
+                <a href="#" class="btn btn-primary btn-lg">Engage Now</a>
             </div>
         </div>
     </header>
