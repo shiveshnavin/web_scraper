@@ -263,12 +263,7 @@ app.get('/hello',function(req,res){
 
 })
 
-<<<<<<< HEAD
 
 app.listen(process.env.PORT || 8080 ,function(){
-=======
-//process.env.PORT
-app.listen( 8080,function(){
->>>>>>> 0e3264a3b8a523598a8e47b3346aaba3a22712f2
     console.log('Server Started');
 })
